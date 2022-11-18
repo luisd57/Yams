@@ -1,0 +1,23 @@
+<div class="p-2 rounded">
+    <div *ngIf="pastry" class="card" style="width: 18rem;">
+        <h3 class="card-title text-center">{{ pastry.ref }}</h3>
+        <img *ngIf="pastry.url" src="{{ pastry.url }}" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title text-center">{{ pastry.name }}</h5>
+            <ul class="list-group" *ngIf="isShown">
+                <h2>Liste d'ingrédients</h2>
+                <li *ngFor="let ingredient of ingredients" class="list-group-item">{{ ingredient }} <i
+                        (click)="deleteRecipe(ingredient)" class="fa-solid fa-trash text-danger" style="cursor: pointer;"></i></li>
+            </ul>
+            <div class="rounded">
+                <label for="label{{ pastry.id }}">Ajouter un ingrédient</label>
+                <input id="label{{ pastry.id }}" (keyup.enter)="addRecipe($event)" />
+                <button class="btn btn-primary m-2" (click)="sortIngredientsByAlphabet()">Ordre alphabétique</button>
+                <button type="button" *ngIf="isShown" (click)="toggleHide()" class="mt-1 btn btn-warning">Cacher
+                    liste</button>
+                <button type="button" *ngIf="!isShown" (click)="toggleHide()" class="mt-1 btn btn-warning">Afficher
+                    liste</button>
+            </div>
+        </div>
+    </div>
+</div>
